@@ -26,7 +26,7 @@ useableRatio = 0.75
 
 nutritionIndex = 0.0
 
-countryPopulation = 326023584.0
+countryPopulation = 316000000.0
 
 insecurePopulationRatio = 0.0
 
@@ -71,7 +71,7 @@ fruitveg = float(''.join(foodProduction[5]))
 meat = float(''.join(foodProduction[6]))
 
 nutritionIndex = (wasteProductionConstantOne * (grains + roots + fruitveg)) + (wasteProductionConstantTwo * (oilseed)) + (wasteProductionConstantThr * (milk + meat + fish))
-
+print(nutritionIndex)
 # we mult by 1000 to get eta in kgs
 eta_f = ((useableRatio * (nutritionIndex/countryPopulation)) / (insecurePopulationRatio)) * 1000.0
 
