@@ -1,8 +1,26 @@
 #EtaP.Mainfile
 #Written by: Alexis Renderos
 
-data = open('EtaPData.txt', 'r')
+foodData = open('EtaPData.txt', 'r')
 stateData = open('StateData.txt', 'r')
+
+
+# INPUTS GO HERE
+
+# 43 is Texas
+targetState = 43
+
+# Target year can only be 2013
+targetYear = 2013
+
+
+# TEST DATA
+# Year 2013
+
+
+# ACTUAL VARIABLES GO HERE
+
+eta_f = 0.0
 
 useableRatio = 0.75
 
@@ -17,7 +35,7 @@ fish = 0.0
 roots = 0.0
 oilseed = 0.0
 milk = 0.0
-fruits = 0.0
+fruitveg = 0.0
 meat = 0.0
 
 wasteProductionConstantOne = 0.5
@@ -26,7 +44,11 @@ wasteProductionConstantThr = 0.2
 
 dietaryNeedsPerYear = 0.15695 # something something kilograms
 
+foodProduction = []
 stateRatios = []
+
+for line in foodData:
+	foodProduction.append(line.split())
 
 for line in stateData:
 	stateRatios.append(line.split())
@@ -35,6 +57,22 @@ i = 0
 k = 0
 
 while i < len(stateRatios):
-	#this grabs the current line
-	print(str(i + 1) + " " + stateRatios[i][0])
+	if ((i + 1) == targetState):
+		insecurePopulationRatio = float(''.join(stateRatios[i]))
+		print(stateRatios[i])
 	i += 1
+
+grains = float(''.join(foodProduction[0]))
+fish = float(''.join(foodProduction[1]))
+roots = float(''.join(foodProduction[2]))
+oilseed = float(''.join(foodProduction[3]))
+milk = float(''.join(foodProduction[4]))
+fruitveg = float(''.join(foodProduction[5]))
+meat = float(''.join(foodProduction[6]))
+
+nutritionIndex = (wasteProductionConstantOne * (grains + roots + fruitveg)) + (wasteProductionConstantTwo * (oilseed)) + (wasteProductionConstantThr * (milk + meat + fish))
+
+# we mult by 1000 to get eta in kgs
+eta_f = ((useableRatio * (nutritionIndex/countryPopulation)) / (insecurePopulationRatio)) * 1000.0
+
+print(eta_f)
