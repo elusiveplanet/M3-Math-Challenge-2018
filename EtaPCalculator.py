@@ -7,8 +7,11 @@ stateData = open('StateData.txt', 'r')
 
 # INPUTS GO HERE
 
+# 13 is Illinois
 # 43 is Texas
-targetState = 43
+targetState = 44
+
+useablePercentage = 0.50 # 0.001
 
 # Target year can only be 2013
 targetYear = 2013
@@ -22,11 +25,11 @@ targetYear = 2013
 
 eta_f = 0.0
 
-useableRatio = 0.75
+useableRatio = useablePercentage / 100.0
 
 nutritionIndex = 0.0
 
-countryPopulation = 316000000.0
+countryPopulation = 316200000.0
 
 insecurePopulationRatio = 0.0
 
@@ -58,8 +61,8 @@ k = 0
 
 while i < len(stateRatios):
 	if ((i + 1) == targetState):
-		insecurePopulationRatio = float(''.join(stateRatios[i]))
-		print(stateRatios[i])
+		insecurePopulationRatio = (float(''.join(stateRatios[i])) / float(100.0))
+		print(insecurePopulationRatio)
 	i += 1
 
 grains = float(''.join(foodProduction[0]))
@@ -70,9 +73,24 @@ milk = float(''.join(foodProduction[4]))
 fruitveg = float(''.join(foodProduction[5]))
 meat = float(''.join(foodProduction[6]))
 
+#print(grains)
+#print(fish)
+#print(roots)
+#print(oilseed)
+#print(milk)
+#print(fruitveg)
+#print(meat)
+
 nutritionIndex = (wasteProductionConstantOne * (grains + roots + fruitveg)) + (wasteProductionConstantTwo * (oilseed)) + (wasteProductionConstantThr * (milk + meat + fish))
-print(nutritionIndex)
+#print((wasteProductionConstantOne * (grains + roots + fruitveg)))
+#print((wasteProductionConstantTwo * (oilseed)))
+#print((wasteProductionConstantThr * (milk + meat + fish)))
+#print(nutritionIndex)
 # we mult by 1000 to get eta in kgs
 eta_f = ((useableRatio * (nutritionIndex/countryPopulation)) / (insecurePopulationRatio)) * 1000.0
 
 print(eta_f)
+
+print(((eta_f - dietaryNeedsPerYear) > 0))
+
+print(eta_f / dietaryNeedsPerYear)
