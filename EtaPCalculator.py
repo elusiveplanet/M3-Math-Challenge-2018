@@ -9,9 +9,9 @@ stateData = open('StateData.txt', 'r')
 
 # 13 is Illinois
 # 43 is Texas
-targetState = 44
+targetState = 43
 
-useablePercentage = 0.50 # 0.001
+useablePercentage = 0.750 # 0.001
 
 # Target year can only be 2013
 targetYear = 2013
