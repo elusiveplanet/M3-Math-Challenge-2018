@@ -11,7 +11,7 @@ stateData = open('StateData.txt', 'r')
 # 43 is Texas
 targetState = 43
 
-useablePercentage = 0.750 # 0.001
+useablePercentage = 75 # 0.001
 
 # Target year can only be 2013
 targetYear = 2013
@@ -32,6 +32,14 @@ nutritionIndex = 0.0
 countryPopulation = 316200000.0
 
 insecurePopulationRatio = 0.0
+
+wasteConstantGrains = 22.74 / 100.0
+wasteConstantRoots = 17.08 / 100.0
+wasteConstantOilseed = 3.31 / 100.0
+wasteConstantFruitVeg = 18.54 / 100.0
+wasteConstantMeat = 9.58 / 100.0
+wasteConstantFishSea = 24.71 / 100.0
+wasteConstantMilk = 12.91 / 100.0
 
 grains = 0.0
 fish = 0.0
@@ -81,7 +89,9 @@ meat = float(''.join(foodProduction[6]))
 #print(fruitveg)
 #print(meat)
 
-nutritionIndex = (wasteProductionConstantOne * (grains + roots + fruitveg)) + (wasteProductionConstantTwo * (oilseed)) + (wasteProductionConstantThr * (milk + meat + fish))
+nutritionIndex = (wasteProductionConstantOne * ((wasteConstantGrains * grains) + (wasteConstantRoots * roots) + (wasteConstantFruitVeg * fruitveg)))
+nutritionIndex += (wasteProductionConstantTwo * (wasteConstantOilseed * oilseed))
+nutritionIndex += (wasteProductionConstantThr * ((wasteConstantMilk * milk) + (wasteConstantMeat * meat) + (wasteConstantFishSea * fish)))
 #print((wasteProductionConstantOne * (grains + roots + fruitveg)))
 #print((wasteProductionConstantTwo * (oilseed)))
 #print((wasteProductionConstantThr * (milk + meat + fish)))
