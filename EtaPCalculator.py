@@ -7,17 +7,16 @@ stateData = open('StateData.txt', 'r')
 
 # INPUTS GO HERE
 
-# 13 is Illinois
 # 43 is Texas
 targetState = 43
 
-useablePercentage = 75
+usablePercentage = 75
 
 # ACTUAL VARIABLES GO HERE
 
 eta_f = 0.0
 
-useableRatio = useablePercentage / 100.0
+usableRatio = usablePercentage / 100.0
 
 nutritionIndex = 0.0
 
@@ -41,11 +40,11 @@ milk = 0.0
 fruitveg = 0.0
 meat = 0.0
 
-wasteProductionConstantOne = 0.5
-wasteProductionConstantTwo = 0.3
-wasteProductionConstantThr = 0.2
+humanConsumptionConstantOne = 0.5
+humanConsumptionConstantTwo = 0.3
+humanConsumptionConstantThr = 0.2
 
-dietaryNeedsPerYear = 0.15695 # something something kilograms
+dietaryNeedsPerYear = 0.15695 # something something metric tons
 
 foodProduction = []
 stateRatios = []
@@ -81,18 +80,20 @@ meat = float(''.join(foodProduction[6]))
 #print(fruitveg)
 #print(meat)
 
-nutritionIndex = (wasteProductionConstantOne * ((wasteConstantGrains * grains) + (wasteConstantRoots * roots) + (wasteConstantFruitVeg * fruitveg)))
-nutritionIndex += (wasteProductionConstantTwo * (wasteConstantOilseed * oilseed))
-nutritionIndex += (wasteProductionConstantThr * ((wasteConstantMilk * milk) + (wasteConstantMeat * meat) + (wasteConstantFishSea * fish)))
-#print((wasteProductionConstantOne * (grains + roots + fruitveg)))
-#print((wasteProductionConstantTwo * (oilseed)))
-#print((wasteProductionConstantThr * (milk + meat + fish)))
+nutritionIndex = (humanConsumptionConstantOne * ((wasteConstantGrains * grains) + (wasteConstantRoots * roots) + (wasteConstantFruitVeg * fruitveg)))
+nutritionIndex += (humanConsumptionConstantTwo * (wasteConstantOilseed * oilseed))
+nutritionIndex += (humanConsumptionConstantThr * ((wasteConstantMilk * milk) + (wasteConstantMeat * meat) + (wasteConstantFishSea * fish)))
+#print((humanConsumptionConstantOne * (grains + roots + fruitveg)))
+#print((humanConsumptionConstantTwo * (oilseed)))
+#print((humanConsumptionConstantThr  * (milk + meat + fish)))
 #print(nutritionIndex)
 # we mult by 1000 to get eta in kgs
-eta_f = ((useableRatio * (nutritionIndex/countryPopulation)) / (insecurePopulationRatio)) * 1000.0
+eta_f = ((usableRatio * (nutritionIndex/countryPopulation)) / (insecurePopulationRatio)) * 1000.0
 
 print(eta_f)
 
 print(((eta_f - dietaryNeedsPerYear) > 0))
 
 print(eta_f / dietaryNeedsPerYear)
+
+#END OF EtaP.Mainfile
