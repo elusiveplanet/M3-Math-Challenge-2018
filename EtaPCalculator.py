@@ -11,15 +11,7 @@ stateData = open('StateData.txt', 'r')
 # 43 is Texas
 targetState = 43
 
-useablePercentage = 75 # 0.001
-
-# Target year can only be 2013
-targetYear = 2013
-
-
-# TEST DATA
-# Year 2013
-
+useablePercentage = 75
 
 # ACTUAL VARIABLES GO HERE
 
